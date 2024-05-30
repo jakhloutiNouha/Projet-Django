@@ -1,0 +1,20 @@
+{% extends 'student_help/base.html' %}
+
+{% block title %}Notification Detail{% endblock %}
+
+{% block content %}
+    <h1>Notification Detail</h1>
+   
+    {% if notification %}
+
+        <h2>Additional Details:</h2>
+        <ul>
+            <li><strong>User:</strong> {{ notification.user.username }}</li>
+            <li><strong>Post Content:</strong> {{ notification.post.content }}</li>
+            <li><strong>Message:</strong> {{ notification.message }}</li>
+            <!-- Include more details as needed -->
+        </ul>
+    {% else %}
+        <p>No notification found.</p>
+    {% endif %}
+{% endblock %}

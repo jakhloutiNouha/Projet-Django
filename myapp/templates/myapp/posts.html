@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tous les Postes</title>
+  <style>
+    .comment-container {
+      margin-top: 10px; /* Marge supérieure pour séparer les commentaires du bouton */
+      max-height: 200px; /* Hauteur maximale pour la zone des commentaires */
+      overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
+  }
+  
+  .comment {
+      display: flex; /* Utilisation de flexbox pour aligner les éléments */
+      margin-bottom: 10px; /* Marge inférieure entre chaque commentaire */
+  }
+  
+  .user-info {
+      display: flex; /* Utilisation de flexbox pour aligner les éléments */
+      align-items: center; /* Alignement vertical */
+      margin-right: 10px; /* Marge à droite pour séparer l'image et le nom de l'utilisateur */
+  }
+  
+  .user-info img {
+      margin-right: 5px; /* Marge à droite pour séparer l'image du nom de l'utilisateur */
+  }
+  
+  .comment-content p {
+      margin: 0; /* Supprimer les marges par défaut du paragraphe */
+  }
+  
+  .comment-button {
+      width: 150px; /* Largeur fixe pour le bouton "Voir les commentaires" */
+  }
+  
+    /* Style de la barre de navigation */
+    .navbar {
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    /* Liens de la barre de navigation */
+    .navbar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+
+    /* Changement de couleur au survol */
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    /* Style actif (pour le lien actuellement sélectionné) */
+    .active {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Table styles */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+    th {
+      text-align: left;
+      background-color: #f2f2f2;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Style d'une publication */
+    .post {
+      width: 600px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    /* Style de l'image de la publication */
+    .post img {
+      width: 100%;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    /* Style du contenu de la publication */
+    .post-content {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    /* Style des commentaires */
+    .comments {
+      margin-top: 20px;
+    }
+
+    /* Style d'un commentaire individuel */
+    .comment {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    /* Style de l'avatar du commentaire */
+    .comment img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    /* Style du nom et du contenu du commentaire */
+    .comment .comment-text {
+      font-size: 14px;
+    }
+    .post-container {
+      /* Existing styles */
+      display: flex; /* Enable flexbox layout */
+      flex-direction: column; /* Arrange elements vertically */
+      align-items: center; /* Center items horizontally */
+    }
+  
+    .post {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+  
+    .user-info img {
+      display: inline-block; /* Afficher l'image en ligne avec le texte */
+      vertical-align: middle; /* Alignement vertical au centre pour correspondre au texte */
+      width: 30px;
+      height: 30px;
+  }
+  
+  .user-info span {
+      display: inline-block; /* Afficher le texte en ligne avec l'image */
+      vertical-align: middle; /* Alignement vertical au centre pour correspondre à l'image */
+  }
+  
+    
+  
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+  
+
+  
+  .user-info {
+      display: flex; /* Utilisation de flexbox pour aligner les éléments */
+      align-items: center; /* Alignement vertical */
+      margin-right: 10px; /* Marge à droite pour séparer l'image et le nom de l'utilisateur */
+  }
+  
+  .user-info img {
+      margin-right: 5px; /* Marge à droite pour séparer l'image du nom de l'utilisateur */
+  }
+  
+
+
+.comment {
+    display: flex; /* Utilisation de flexbox pour aligner les éléments */
+    margin-bottom: 10px; /* Marge inférieure entre chaque commentaire */
+}
+
+.user-info {
+    display: flex; /* Utilisation de flexbox pour aligner les éléments */
+    align-items: center; /* Alignement vertical */
+    margin-right: 10px; /* Marge à droite pour séparer l'image et le nom de l'utilisateur */
+}
+
+.user-info img {
+    margin-right: 5px; /* Marge à droite pour séparer l'image du nom de l'utilisateur */
+}
+
+.comment-content p {
+  width: 150px; /* Largeur fixe pour le bouton "Voir les commentaires" */
+  display: block; /* Afficher le bouton en tant que bloc pour appliquer les marges automatiques */
+  margin-left: auto; /* Pousser le bouton vers le centre en utilisant une marge automatique */
+  margin-right: auto; /* Pousser le bouton vers le centre en utilisant une marge automatique */}
+
+.comment-button {
+  width: 150px; /* Largeur fixe pour le bouton "Voir les commentaires" */
+  display: block; /* Afficher le bouton en tant que bloc pour appliquer les marges automatiques */
+  margin-left: auto; /* Pousser le bouton vers le centre en utilisant une marge automatique */
+  margin-right: auto; /* Pousser le bouton vers le centre en utilisant une marge automatique */
+}
+
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <a class="active" href="#home">Accueil</a>
+  <a href="{% url 'creation_stage' %}">Stage</a>
+  <a href="{% url 'creation_logement' %}">Logement</a>
+  <a href="{% url 'creation_transport' %}">Transport</a>
+  <a href="{% url 'create_post_rec' %}">Recommendation</a>
+  
+  
+
+  
+</div>
+
+
+
+<div style="padding: 20px;">
+ 
+
+  {% if post_data %}
+
+  <div class="post-container">
+    {% comment %} {% for category, posts in post_data.items() %} {% endcomment %}
+      <h2>{{ category }}</h2>
+      <a href="{% url 'create_post_rec' %}">Recommendation</a>
+
+      {% for post in post_data.demandes %}
+      <a href="{% url 'myposte' post.token %}">mes postes</a>
+      <a href="{% url 'profile_view' post.token %}">mon profile</a>
+
+        <div class="post">
+          <div class="user-info" width="20">
+            <img src="{{ post.userimage.url }}" alt="User profile image" height="30" width="30">
+            <span>{{ post.username }} {{ post.prenom }}</span>
+            {% comment %} <span>{{ post.userimage }}</span> {% endcomment %}
+          </div>
+          <div class="post-content">
+            <div class="post-image">
+              <img src="{{ post.image }}" alt="Image du poste" width="100">
+            </div>
+            <div class="post-details">
+              {% if post.intitule %}
+                <h3>{{ post.intitule }}</h3>
+              {% elif post.societe %}
+                <h3>{{ post.societe }}</h3>
+              {% else %}
+                <h3>-</h3>
+              {% endif %}
+              <p>{{ post.description }}</p>
+            </div>
+          </div>
+          <button onclick="showComments('{{ post.id }}')" class = "comment-button" >Voir les commentaires</button>
+          <div id="comment-section">
+            
+            <input type="text" id="comment-text" placeholder="Votre commentaire">
+            <button onclick="addComment('{{ post.id }}')">Ajouter un commentaire</button>
+        </div>  
+          <div class="post-actions" id="post-actions-{{ post.id }}">
+            {% if post.reaction == True %}
+              <a href="#" onclick="likePost('{{ post.id }}', true)" data-post-id="{{ post.id }}">
+                <img src="../../static/images/like.png" alt="Like" height="30" width="30">
+              </a>
+            {% else %}
+              <a href="#" onclick="likePost('{{ post.id }}', false)" data-post-id="{{ post.id }}">
+                <img src="../../static/images/dislike.png" alt="Dislike" height="30" width="30">
+              </a>
+            {% endif %}
+            {{ post.reactions_count }}
+            <div id="comments-{{ post.id }}" style="display: none;">
+              {% for commentaire in post.commentaires %}
+              <div class="comment">
+                  <div class="user-info" width="20">
+                      <img src="{{ commentaire.user.image.url }}" alt="User profile image" height="30" width="30">
+                      <span>{{ commentaire.user.nom }} {{ commentaire.user.prenom }}</span>
+                  </div>
+                  <div class="comment-content">
+                      <p>{{ commentaire.contenu }}</p>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% comment %} {% endfor %} {% endcomment %}
+  </div>
+  
+  <script>
+    function likePost(postId, like) {
+      var token = localStorage.getItem('token');
+      var requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        }
+      };
+  
+      fetch('/like_post/' + postId + '/' + token + '/', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Mettre à jour l'icône de like ou dislike
+            var postActions = document.getElementById('post-actions-' + postId);
+            var imgElement = postActions.querySelector('img');
+            if (like === true) {
+              imgElement.src = '../../static/images/like.png';
+              imgElement.alt = 'Like';
+            } else if (like === false) {
+              imgElement.src = '../../static/images/dislike.png';
+              imgElement.alt = 'Dislike';
+            }
+            console.log('Like/dislike successful');
+          } else {
+            console.error('Error liking/disliking post');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+    function addComment(postId) {
+      var commentText = document.getElementById("comment-text").value;
+      var token = localStorage.getItem('token');
+    
+      // Envoie de la requête AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/addComment/" + postId + "/" + token + "/");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken')); // Inclure le jeton CSRF
+    
+      xhr.onload = function () {
+          if (xhr.status === 200) {
+              // Le commentaire a été ajouté avec succès
+              console.log("Le commentaire a été ajouté avec succès !");
+              // Vous pouvez effectuer d'autres actions ici, comme rafraîchir la liste des commentaires
+          } else {
+              // Il y a eu une erreur lors de l'ajout du commentaire
+              console.error("Erreur lors de l'ajout du commentaire : " + xhr.responseText);
+          }
+      };
+    
+      xhr.send(JSON.stringify({ "comment": commentText }));
+    }
+  
+    function showComments(postId) {
+      var commentsSection = document.getElementById('comments-' + postId);
+      if (commentsSection.style.display === 'none') {
+        commentsSection.style.display = 'block';
+      } else {
+        commentsSection.style.display = 'none';
+      }
+    }
+  
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== "") {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + "=")) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+  </script>
+  
+
+  {% endif %}
+</div>
+
+<div style="padding: 20px;">
+
+  {% if post_data %}
+
+  <div class="post-container">
+    {% comment %} {% for category, posts in post_data.items() %} {% endcomment %}
+      <h2>{{ category }}</h2>
+      <a href="{% url 'create_post_rec' %}">Recommendation</a>
+
+      {% for post in post_data.offres %}
+      <a href="{% url 'myposte' post.token %}">mes poste</a>
+
+        <div class="post">
+          <div class="user-info" width="20">
+            <img src="{{ post.userimage.url }}" alt="User profile image" height="30" width="30">
+            <span>{{ post.username }} {{ post.prenom }}</span>
+            {% comment %} <span>{{ post.userimage }}</span> {% endcomment %}
+          </div>
+          <div class="post-content">
+            <div class="post-image">
+              <img src="{{ post.image }}" alt="Image du poste" width="100">
+            </div>
+            <div class="post-details">
+              {% if post.intitule %}
+                <h3>{{ post.intitule }}</h3>
+              {% elif post.societe %}
+                <h3>{{ post.societe }}</h3>
+              {% else %}
+                <h3>-</h3>
+              {% endif %}
+              <p>{{ post.description }}</p>
+            </div>
+          </div>
+          <button onclick="showComments('{{ post.id }}')" class = "comment-button" >Voir les commentaires</button>
+          <div id="comment-section">
+            
+            <input type="text" id="comment" placeholder="Votre commentaire">
+            <button onclick="addComment('{{ post.id }}')">Ajouter un commentaire</button>
+        </div>  
+          <div class="post-actions" id="post-actions-{{ post.id }}">
+            {% if post.reaction == True %}
+              <a href="#" onclick="likePost('{{ post.id }}', true)" data-post-id="{{ post.id }}">
+                <img src="../../static/images/like.png" alt="Like" height="30" width="30">
+              </a>
+            {% else %}
+              <a href="#" onclick="likePost('{{ post.id }}', false)" data-post-id="{{ post.id }}">
+                <img src="../../static/images/dislike.png" alt="Dislike" height="30" width="30">
+              </a>
+            {% endif %}
+            {{ post.reactions_count }}
+            <div id="comments-{{ post.id }}" style="display: none;">
+              {% for commentaire in post.commentaires %}
+              <div class="comment">
+                  <div class="user-info" width="20">
+                      <img src="{{ commentaire.user.image.url }}" alt="User profile image" height="30" width="30">
+                      <span>{{ commentaire.user.nom }} {{ commentaire.user.prenom }}</span>
+                  </div>
+                  <div class="comment-content">
+                      <p>{{ commentaire.contenu }}</p>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% comment %} {% endfor %} {% endcomment %}
+  </div>
+  
+  <script>
+    function likePost(postId, like) {
+      var token = localStorage.getItem('token');
+      var requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        }
+      };
+  
+      fetch('/like_post/' + postId + '/' + token + '/', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Mettre à jour l'icône de like ou dislike
+            var postActions = document.getElementById('post-actions-' + postId);
+            var imgElement = postActions.querySelector('img');
+            if (like === true) {
+              imgElement.src = '../../static/images/like.png';
+              imgElement.alt = 'Like';
+            } else if (like === false) {
+              imgElement.src = '../../static/images/dislike.png';
+              imgElement.alt = 'Dislike';
+            }
+            console.log('Like/dislike successful');
+          } else {
+            console.error('Error liking/disliking post');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+    function addComment(postId) {
+      var commentText = document.getElementById("comment").value;
+      var token = localStorage.getItem('token');
+    
+      // Envoie de la requête AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/addComment/" + postId + "/" + token + "/");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken')); // Inclure le jeton CSRF
+    
+      xhr.onload = function () {
+          if (xhr.status === 200) {
+              // Le commentaire a été ajouté avec succès
+              console.log("Le commentaire a été ajouté avec succès !");
+              // Vous pouvez effectuer d'autres actions ici, comme rafraîchir la liste des commentaires
+          } else {
+              // Il y a eu une erreur lors de l'ajout du commentaire
+              console.error("Erreur lors de l'ajout du commentaire : " + xhr.responseText);
+          }
+      };
+    
+      xhr.send(JSON.stringify({ "comment": commentText }));
+    }
+    function showComments(postId) {
+      var commentsSection = document.getElementById('comments-' + postId);
+      if (commentsSection.style.display === 'none') {
+        commentsSection.style.display = 'block';
+      } else {
+        commentsSection.style.display = 'none';
+      }
+    }
+  
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== "") {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + "=")) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+  </script>
+  
+
+  {% endif %}
+</div>
+
+</body>
+</html>
